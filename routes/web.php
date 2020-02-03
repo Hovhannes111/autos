@@ -23,10 +23,11 @@ Route::get('/carSingle', 'SiteController@carSingle');
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/my_cabinet','HomeController@index');
+
+Route::match(['get','post'],'/add-product','HomeController@addProduct');
+
 
 
 
 Route::any('{error}', 'SiteController@error');
-
-

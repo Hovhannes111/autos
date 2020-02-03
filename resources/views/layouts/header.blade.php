@@ -15,7 +15,7 @@
                 <li class="nav-item" id="blog"><a href="{{url('/blog')}}" class="nav-link">Blog</a></li>
                 <li class="nav-item" id="contact"><a href="{{url('/contact')}}" class="nav-link">Contact</a></li>
                 @auth
-                    <li class="nav-item" id="cabinet"><a href="#" class="nav-link">My Cabinet</a></li>
+                    <li class="nav-item" id="myCabinet"><a href="{{url('/my_cabinet')}}" class="nav-link">My Cabinet</a></li>
 
                 @endauth
                 @guest

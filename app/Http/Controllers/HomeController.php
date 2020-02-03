@@ -21,8 +21,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-//    public function index()
-//    {
-//        return view('home');
-//    }
+    public function index()
+    {
+        return view('user.home');
+    }
+
+    public function addProduct(Request $request)
+    {
+        if ($request->method() === 'POST') {
+            dd($request->all());
+        } else {
+            return view('user.add-product');
+        }
+    }
 }
