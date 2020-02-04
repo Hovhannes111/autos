@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\DataCollector\AjaxDataCollector;
 
 class HomeController extends Controller
 {
@@ -31,27 +32,30 @@ class HomeController extends Controller
     {
         if ($request->method() === 'POST') {
             $request->validate([
-                'name' => 'required|min:3',
+                'name' => 'required|min:3|regex:/^[a-zA-Z ]+$/',
                 'year' => 'required|integer|min:4',
                 'price' => 'required|integer',
-                'engine' => 'required|string',
+                'engine' => 'required|string|regex:/^[a-zA-Z ]+$/',
                 'power' => 'required|integer',
                 'volume' => 'required',
-                'millage' => 'required',
-                'color' => 'required',
-                'drive' => 'required',
-                'condition' => 'required',
-                'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'millage' => 'required|integer',
+                'color' => 'required|regex:/^[a-zA-Z ]+$/',
+                'drive' => 'required|regex:/^[a-zA-Z ]+$/',
+                'condition' => 'required|regex:/^[a-zA-Z ]+$/',
+                'images' => 'mimes:jpeg,png,jpg,gif,svg',
             ]);
-            dd('asd');
-            $imageName = time() . '.' . $request->images->extension();
-//            $request->images->move(public_path('images'), $imageName);
-            dump($imageName);
-            dd($request->all());
-        } else {
-            $user_id = Auth::user()->getAuthIdentifier();
+            $images = [];
+            foreach ($request->image as  $value){
+                $images[] = $value->getClientOriginalName();
+            }
+            dd($images);
 
-            return view('user.add-product', compact('user_id'));
+//            $imageName = time() . '.' . $request->image->extension();
+//            $request->images->move(public_path('auto_images'), $imageName);
+
         }
+        $user_id = Auth::user()->getAuthIdentifier();
+        return view('user.add-product', compact('user_id'));
     }
+
 }
