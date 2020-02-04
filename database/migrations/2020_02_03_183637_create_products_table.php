@@ -15,16 +15,18 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->unsignedBigInteger('year');
             $table->unsignedBigInteger('price');
             $table->string('engine');
             $table->unsignedBigInteger('power');
-            $table->unsignedBigInteger('volume');
+            $table->string('volume');
             $table->unsignedBigInteger('millage');
             $table->string('color');
             $table->string('drive');
             $table->string('condition');
+            $table->string('images');
             $table->string('description')->nullable();
             $table->timestamps();
         });

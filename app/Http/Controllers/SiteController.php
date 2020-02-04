@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
 use App\Contact;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SiteController extends Controller
