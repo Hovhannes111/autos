@@ -2,6 +2,13 @@
 @section('content')
     <section class="ftco-section bg-light">
         <div class="container">
+            <a style="font-size: 25px; color: #777777" href="{{url('my_cabinet')}}">return</a>
+            @if(session()->has('added'))
+                <div class="container alert">
+                    <p class="alert alert-success"
+                       style="text-align: center;font-size: 25px">{{session()->get('added')}}</p>
+                </div>
+            @endif
             <form method="post" action="{{url('/add-product')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ $user_id }}">
@@ -135,7 +142,7 @@
                     <label for="description">More information</label>
                     <textarea name="description" style="height: 150px !important;" type="text"
                               class="form-control @error('description') is-invalid @enderror"
-                              id="description"></textarea>
+                              id="description">{{old('description')}}</textarea>
                     @error('description')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

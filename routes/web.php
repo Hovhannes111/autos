@@ -26,6 +26,9 @@ Auth::routes();
 Route::get('/my_cabinet','HomeController@index');
 
 Route::match(['get','post'],'/add-product','HomeController@addProduct');
+Route::match(['get','post'],'/edit-profil','HomeController@editProfil');
+Route::match(['get','post'],'/change-password','HomeController@changePassword');
+Route::post('/deleteProduct', 'HomeController@deleteProduct');
 
 
 
