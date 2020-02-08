@@ -33,7 +33,7 @@
                                 <li class="nav-item"><a href="{{url('add-images')}}" class="nav-link btn btn-primary">Add
                                         new images </a></li>
 
-                                <li class="nav-item"><a href="" class="nav-link btn btn-primary">Delete
+                                <li class="nav-item"><a href="{{url('delete-images')}}" class="nav-link btn btn-primary">Delete
                                         selected images </a></li>
 
                                 <form method="POST" action="{{route('deleteProduct')}}">

@@ -31,6 +31,7 @@ Route::match(['get','post'],'/change-password','HomeController@changePassword');
 Route::post('/deleteProduct', 'HomeController@deleteProduct')->name('deleteProduct');
 Route::match(['get','post'], '/edit-product-info', 'HomeController@editProductInfo');
 Route::match(['get','post'], '/add-images', 'HomeController@addNewImages');
+Route::match(['get','post'], '/delete-images', 'HomeController@deleteImages');
 
 
 

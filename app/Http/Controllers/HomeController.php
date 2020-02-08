@@ -242,4 +242,15 @@ class HomeController extends Controller
         }
     }
 
+    public function deleteImages(Request $request){
+        if ($request->method() === "POST"){
+            dd($request->all());
+        }else{
+            $user_id = Auth::user()->getAuthIdentifier();
+            $product = Product::where('user_id', $user_id)->first();
+            $images = json_decode($product->images);
+            return view('user.delete-images', compact('images'));
+        }
+    }
+
 }
