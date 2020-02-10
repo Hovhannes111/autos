@@ -48,8 +48,9 @@ class HomeController extends Controller
                 'color' => 'required|regex:/^[a-zA-Z ]+$/',
                 'drive' => 'required|regex:/^[a-zA-Z ]+$/',
                 'condition' => 'required|regex:/^[a-zA-Z ]+$/',
-                'images' => 'max:1000|mimes:jpeg,png,jpg,gif,svg',
+                'images' => 'mimes:jpeg,png,jpg,gif,svg',
             ]);
+//            dd($request->allFiles());
             $images = [];
             for ($i = 0; $i < count($request['image']); $i++) {
                 $image = time() . rand(0, 99) . '.' . $request['image'][$i]->getClientOriginalExtension();
@@ -146,8 +147,10 @@ class HomeController extends Controller
         $user_id = Auth::user()->getAuthIdentifier();
         $product = Product::where('user_id', $user_id)->first();
         $images = json_decode($product->images);
-        for ($i = 0; $i < count($images); $i++) {
-            unlink(public_path('images/auto_images/' . $images[$i]));
+        if ($images !== null) {
+            for ($i = 0; $i < count($images); $i++) {
+                unlink(public_path('images/auto_images/' . $images[$i]));
+            }
         }
         $product->delete();
         session()->flash('delete_product', 'Your product is deleted');
@@ -242,10 +245,11 @@ class HomeController extends Controller
         }
     }
 
-    public function deleteImages(Request $request){
-        if ($request->method() === "POST"){
+    public function deleteImages(Request $request)
+    {
+        if ($request->method() === "POST") {
             dd($request->all());
-        }else{
+        } else {
             $user_id = Auth::user()->getAuthIdentifier();
             $product = Product::where('user_id', $user_id)->first();
             $images = json_decode($product->images);
